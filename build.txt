@@ -1,0 +1,3 @@
+displayName = Terraria Death Penalty
+author = Speights
+version = 0.1
