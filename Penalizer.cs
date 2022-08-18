@@ -16,7 +16,7 @@ namespace terraria_death_penalty
         }
         public void AddPenalty(Cause cause, Terraria.Player player)
         {
-            PenaltyManager.GetInstance().GetRandomPenalty().Penalty.Apply(player);
+            PenaltyManager.GetInstance().GetRandomPenalty(cause, player).Penalty.Apply(player);
         }
 
 

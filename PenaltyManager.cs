@@ -34,12 +34,15 @@ namespace terraria_death_penalty
                         new ReplaceTilePenalty(new ushort[] { TileID.Lead }, TileID.Stone),
                         new ReplaceTilePenalty(new ushort[] { 1001 }, TileID.Iron),
                     }, "Isn't it ironic?"), .2, .5, true),
+                new PenaltyConfig(new SpawnChangePenalty("You wake up in a strange new place..."), 0, .3, true),
+                //new PenaltyConfig(new ReverseGravityPenalty("Up is Down"), 0, .3, true)
             });
         }
 
-        public PenaltyConfig GetRandomPenalty()
+        public PenaltyConfig GetRandomPenalty(Cause cause, Terraria.Player player)
         {
-            var penalty = penalties[new Random().Next(penalties.Count)];
+            var valid_penalties = penalties.Where(p => p.Penalty.IsValid(cause, player));
+            var penalty = valid_penalties.ToList()[new Random().Next(valid_penalties.ToList().Count)];
             if (!penalty.IsRepeatable)
             {
                 penalties.Remove(penalty);
@@ -70,7 +73,7 @@ namespace terraria_death_penalty
 
     enum Cause
     {
-        Death, Boss
+        Death, Boss, Manual
     }
 
     class PenaltyConfig

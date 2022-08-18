@@ -54,8 +54,8 @@ namespace terraria_death_penalty.Penalties
         
         public override bool IsValid(Cause cause, Terraria.Player player)
         {
-            if (cause == Cause.Boss) return false;
-            return true;
+            if (cause == Cause.Death) return true;
+            return false;
         }
     }
 }
